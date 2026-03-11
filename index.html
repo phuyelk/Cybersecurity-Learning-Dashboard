@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberLearn Interactive Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-badge">CL</span>
+        <div>
+          <h1>CyberLearn Dashboard</h1>
+          <p>Interactive cybersecurity learning platform</p>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <button class="nav-link active" data-section="dashboard">Dashboard</button>
+        <button class="nav-link" data-section="threat-library">Threat Library</button>
+        <button class="nav-link" data-section="quiz">Quiz Lab</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="dashboard" class="section active">
+        <div class="hero card-glow">
+          <div>
+            <p class="eyebrow">Cybersecurity Awareness Hub</p>
+            <h2>Learn modern cyber defense through active exploration.</h2>
+            <p>
+              Explore practical threat intelligence and test your knowledge with scenario-based
+              quizzes covering phishing, malware, ransomware, password hygiene, network security,
+              social engineering, authentication, and data privacy.
+            </p>
+            <div class="hero-actions">
+              <button class="action-btn" data-jump="threat-library">Explore threats</button>
+              <button class="action-btn secondary" data-jump="quiz">Start quiz challenge</button>
+            </div>
+          </div>
+          <div class="threat-highlight">
+            <h3>Security Focus of the Day</h3>
+            <p id="focus-topic">Loading recommendations...</p>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <h3>Threats Explored</h3>
+            <p id="metric-threats">0</p>
+          </article>
+          <article class="metric-card">
+            <h3>Quizzes Completed</h3>
+            <p id="metric-completed">0</p>
+          </article>
+          <article class="metric-card">
+            <h3>Best Score</h3>
+            <p id="metric-best-score">0%</p>
+          </article>
+          <article class="metric-card">
+            <h3>Last Topic Practiced</h3>
+            <p id="metric-last-topic">No attempts yet</p>
+          </article>
+        </div>
+
+        <div class="learning-path">
+          <h3>Suggested Learning Path</h3>
+          <div id="learning-path-steps" class="path-grid"></div>
+        </div>
+      </section>
+
+      <section id="threat-library" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Threat Library</p>
+            <h2>Interactive threat intelligence cards</h2>
+          </div>
+          <p>
+            Filter by category, search by keyword, and expand each card for real-world examples and
+            prevention guidance.
+          </p>
+        </div>
+
+        <div class="library-controls card-glow">
+          <input id="threat-search" type="text" placeholder="Search threats, examples, or defenses..." />
+          <div id="threat-filters" class="chip-row"></div>
+        </div>
+
+        <div id="threat-count" class="subtle-note"></div>
+        <div id="threat-grid" class="threat-grid"></div>
+      </section>
+
+      <section id="quiz" class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Quiz Lab</p>
+            <h2>Adaptive cybersecurity challenge</h2>
+          </div>
+          <p>
+            Build confidence with randomized questions, instant coaching feedback, and a targeted
+            post-quiz study summary.
+          </p>
+        </div>
+
+        <div id="quiz-config" class="quiz-config card-glow">
+          <h3>Select quiz topics</h3>
+          <p>Choose one or more categories to generate a randomized quiz session.</p>
+          <div id="quiz-topic-options" class="chip-row"></div>
+          <button id="start-quiz-btn" class="action-btn">Start randomized quiz</button>
+        </div>
+
+        <div id="quiz-panel" class="quiz-panel hidden">
+          <div class="quiz-progress">
+            <span id="quiz-progress-text">Question 1 of 10</span>
+            <div class="progress-track">
+              <div id="quiz-progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <article class="quiz-question card-glow">
+            <p id="quiz-topic-tag" class="topic-tag"></p>
+            <h3 id="quiz-question-text"></h3>
+            <div id="quiz-answers" class="quiz-answers"></div>
+            <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+            <button id="next-question-btn" class="action-btn hidden">Next question</button>
+          </article>
+        </div>
+
+        <div id="quiz-summary" class="quiz-summary card-glow hidden"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
