@@ -1,56 +1,62 @@
-# CyberLearn Interactive Dashboard
+# CyberLearn Interactive Dashboard (Flask)
 
-A polished, interactive cybersecurity learning web app designed for portfolio showcase use (GitHub / LinkedIn).
+A polished cybersecurity learning dashboard built with Flask, including interactive threat education,
+quiz practice, password analysis, and phishing detection tools.
 
-## Project Highlights
+## Features
 
-- **Modern cybersecurity UI**: dark theme, neon accents, responsive layout, hover effects, and smooth transitions.
-- **Focused experience**: streamlined to core learning modules only:
-  - Dashboard
-  - Threat Library
-  - Quiz Lab
-- **Expanded Threat Library**:
-  - 12+ detailed threat topics
-  - category filters + keyword search
-  - interactive expandable cards
-  - real-world examples and prevention strategies
-- **Expanded Interactive Quiz Lab**:
-  - 35+ questions across:
-    - phishing
-    - malware
-    - ransomware
-    - password security
-    - social engineering
-    - network security
-    - data privacy
-    - safe browsing
-    - authentication practices
-  - randomized question order + shuffled answer options
-  - progress indicator
-  - instant feedback with explanations
-  - final score summary with topic-level breakdown and targeted study recommendations
-- **Persistent learning metrics**:
-  - threats explored
-  - quizzes completed
-  - best score
-  - topic mastery trends (stored in browser localStorage)
+- **Dashboard + Learning Modules**
+  - Dashboard overview
+  - Threat Library (interactive cards, filters, search, expandable details)
+  - Quiz Lab (randomized questions, progress tracking, instant feedback, score summary)
 
-## Removed Scope
+- **New Interactive Security Tools**
+  - **Password Analyzer** (`/password-analyzer`)
+    - password strength meter
+    - entropy estimate
+    - estimated crack time
+    - actionable security recommendations
+  - **Phishing Detector** (`/phishing-detector`)
+    - phishing risk score (0–100)
+    - risk level (Low, Moderate, High, Critical)
+    - detected phishing indicators
+    - practical response recommendations
 
-To keep the experience focused and streamlined, there are **no Cyber Statistics** or **Live Vulnerabilities** pages, links, or routes in this project.
+- **Design**
+  - dark cybersecurity dashboard theme
+  - neon accent color system
+  - modern cards, smooth transitions, hover interactions
+  - responsive layout
 
-## Tech Stack
+## Project Structure
 
-- HTML
-- CSS
-- Vanilla JavaScript
+```text
+app.py
+templates/
+  base.html
+  index.html
+  password_tool.html
+  phishing_tool.html
+static/
+  css/styles.css
+  js/dashboard.js
+  js/password_tool.js
+```
 
 ## Run Locally
 
-Because this is a static frontend project, you can run it by opening `index.html` directly, or serve it locally:
+1. Install dependencies:
 
 ```bash
-python3 -m http.server 8080
+pip install -r requirements.txt
 ```
 
-Then open `http://localhost:8080`.
+2. Start the Flask app:
+
+```bash
+python app.py
+```
+
+3. Open:
+
+`http://127.0.0.1:5000`

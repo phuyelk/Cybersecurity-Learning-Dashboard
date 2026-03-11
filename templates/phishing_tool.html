@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% set title = "Phishing Detector - CyberLearn" %}
+
+{% block content %}
+  <section class="tool-page">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Phishing Analysis Tool</p>
+        <h2>Phishing Detector</h2>
+      </div>
+      <p>Analyze suspicious messages using a rule-based cybersecurity awareness scanner.</p>
+    </div>
+
+    <form method="post" class="tool-card card-glow">
+      <div class="form-grid">
+        <div>
+          <label class="form-label" for="sender-email">Sender email address</label>
+          <input
+            id="sender-email"
+            class="form-control"
+            type="text"
+            name="sender_email"
+            placeholder="alerts@company-security.com"
+            value="{{ form_data.sender_email }}"
+            required
+          />
+        </div>
+        <div>
+          <label class="form-label" for="subject-line">Email subject</label>
+          <input
+            id="subject-line"
+            class="form-control"
+            type="text"
+            name="subject"
+            placeholder="Security alert: account suspended"
+            value="{{ form_data.subject }}"
+            required
+          />
+        </div>
+      </div>
+
+      <label class="form-label" for="email-body">Email body text</label>
+      <textarea
+        id="email-body"
+        class="form-control"
+        name="body"
+        rows="7"
+        placeholder="Paste suspicious message content here..."
+        required
+      >{{ form_data.body }}</textarea>
+
+      <label class="form-label" for="suspicious-link">Suspicious link (optional)</label>
+      <input
+        id="suspicious-link"
+        class="form-control"
+        type="text"
+        name="link"
+        placeholder="http://example-login-security.com/verify"
+        value="{{ form_data.link }}"
+      />
+
+      <button type="submit" class="action-btn">Analyze Message</button>
+    </form>
+
+    {% if result %}
+      <div class="results-grid">
+        <article class="result-card card-glow risk-card risk-{{ result.risk_class }}">
+          <div class="result-header">
+            <h3>Risk Level: {{ result.risk_level }}</h3>
+            <span class="risk-score">{{ result.score }}/100</span>
+          </div>
+          <div class="meter-track">
+            <div class="meter-fill risk-fill risk-{{ result.risk_class }}" style="width: {{ result.score }}%"></div>
+          </div>
+          <p>Phishing Risk Score indicates how many warning indicators were detected.</p>
+        </article>
+
+        <article class="result-card card-glow">
+          <h3>Detected Issues</h3>
+          <ul class="result-list">
+            {% for item in result.indicators %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </article>
+      </div>
+
+      <article class="result-card card-glow">
+        <h3>Recommendations</h3>
+        <ul class="result-list">
+          {% for tip in result.recommendations %}
+            <li>{{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+    {% endif %}
+
+    <article class="education-card card-glow">
+      <h3>How phishing attacks trick users</h3>
+      <p>
+        Phishing relies on social engineering. Attackers create fear, urgency, or authority to push
+        users into unsafe actions like sharing credentials, sending payments, or clicking malicious
+        links.
+      </p>
+      <p>
+        Always verify sender identity, inspect domains closely, and confirm unusual requests through
+        trusted channels before responding.
+      </p>
+    </article>
+  </section>
+{% endblock %}

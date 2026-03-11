@@ -533,8 +533,9 @@ const quizBank = [
   },
 ];
 
-const navButtons = [...document.querySelectorAll(".nav-link")];
 const sections = [...document.querySelectorAll(".section")];
+
+const navLinks = [...document.querySelectorAll("[data-home-section]")];
 const jumpButtons = [...document.querySelectorAll("[data-jump]")];
 
 const threatSearchInput = document.getElementById("threat-search");
@@ -580,24 +581,49 @@ function init() {
   initThreatLibrary();
   initQuizLab();
   renderDashboardMetrics();
+  openSectionFromHash();
 }
 
 function bindNavigation() {
-  navButtons.forEach((button) => {
-    button.addEventListener("click", () => setActiveSection(button.dataset.section));
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      // Keep normal route behavior for other pages; only intercept in-page section links here.
+      const section = link.dataset.homeSection;
+      if (!section) {
+        return;
+      }
+      event.preventDefault();
+      setActiveSection(section);
+      window.history.replaceState(null, "", `/#${section}`);
+    });
   });
 
   jumpButtons.forEach((button) => {
-    button.addEventListener("click", () => setActiveSection(button.dataset.jump));
+    button.addEventListener("click", () => {
+      setActiveSection(button.dataset.jump);
+      window.history.replaceState(null, "", `/#${button.dataset.jump}`);
+    });
   });
+}
+
+function openSectionFromHash() {
+  const hash = window.location.hash.replace("#", "");
+  if (!hash) {
+    setActiveSection("dashboard");
+    return;
+  }
+
+  const sectionExists = sections.some((section) => section.id === hash);
+  setActiveSection(sectionExists ? hash : "dashboard");
 }
 
 function setActiveSection(sectionId) {
   sections.forEach((section) => {
     section.classList.toggle("active", section.id === sectionId);
   });
-  navButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.section === sectionId);
+
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.dataset.homeSection === sectionId);
   });
 }
 
@@ -694,7 +720,6 @@ function initQuizLab() {
       alert("Select at least one topic to start the quiz.");
       return;
     }
-
     startQuiz(selectedTopics);
   });
 
@@ -845,6 +870,7 @@ function finishQuiz() {
   const restartBtn = document.getElementById("restart-quiz-btn");
   restartBtn.addEventListener("click", () => {
     setActiveSection("quiz");
+    window.history.replaceState(null, "", "/#quiz");
   });
 }
 

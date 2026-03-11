@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or "CyberLearn Dashboard" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-badge">CL</span>
+        <div>
+          <h1>CyberLearn Dashboard</h1>
+          <p>Interactive cybersecurity learning platform</p>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a
+          class="nav-link {% if active_page == 'dashboard' %}active{% endif %}"
+          href="/"
+          data-home-section="dashboard"
+          >Dashboard</a
+        >
+        <a class="nav-link" href="/#threat-library" data-home-section="threat-library">Threat Library</a>
+        <a class="nav-link" href="/#quiz" data-home-section="quiz">Quiz Lab</a>
+        <a class="nav-link {% if active_page == 'password' %}active{% endif %}" href="{{ url_for('password_analyzer') }}"
+          >Password Analyzer</a
+        >
+        <a class="nav-link {% if active_page == 'phishing' %}active{% endif %}" href="{{ url_for('phishing_detector') }}"
+          >Phishing Detector</a
+        >
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

@@ -6,10 +6,10 @@
   --text: #ecf2ff;
   --muted: #9bb1d8;
   --neon: #1de9b6;
-  --neon-soft: rgba(29, 233, 182, 0.22);
   --accent: #5f8cff;
   --danger: #ff6584;
   --warn: #f8d05e;
+  --caution: #ff9f43;
 }
 
 * {
@@ -82,9 +82,12 @@ body {
 .main-nav {
   display: flex;
   gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
 .nav-link {
+  display: inline-block;
+  text-decoration: none;
   background: transparent;
   color: var(--muted);
   border: 1px solid rgba(130, 176, 255, 0.3);
@@ -273,7 +276,8 @@ main {
 
 .library-controls,
 .quiz-config,
-.quiz-question {
+.quiz-question,
+.tool-card {
   border-radius: 0.9rem;
   border: 1px solid var(--line);
   background: rgba(9, 20, 44, 0.84);
@@ -496,23 +500,189 @@ main {
   margin: 0;
 }
 
-.summary-grid {
+.summary-grid,
+.results-grid {
   margin-top: 0.75rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
 }
 
-.summary-card {
+.summary-card,
+.result-card {
   border-radius: 0.65rem;
   border: 1px solid rgba(126, 170, 255, 0.28);
-  padding: 0.65rem;
+  padding: 0.85rem;
   background: rgba(66, 104, 182, 0.12);
 }
 
 .summary-card p {
   margin: 0.25rem 0 0;
   color: #c4d8ff;
+}
+
+.tool-page {
+  animation: fadeIn 0.32s ease;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+  color: #c4d8ff;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-control {
+  width: 100%;
+  margin-bottom: 0.9rem;
+  padding: 0.68rem 0.75rem;
+  border: 1px solid rgba(125, 170, 255, 0.38);
+  border-radius: 0.65rem;
+  background: rgba(10, 18, 35, 0.95);
+  color: var(--text);
+  resize: vertical;
+}
+
+.password-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
+  align-items: start;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.result-header h3 {
+  margin: 0;
+}
+
+.result-list {
+  margin: 0.45rem 0 0;
+  padding-left: 1rem;
+  color: #d5e5ff;
+}
+
+.result-list li {
+  margin-bottom: 0.4rem;
+}
+
+.meter-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(124, 170, 255, 0.2);
+  overflow: hidden;
+  margin: 0.7rem 0;
+}
+
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.55s ease;
+}
+
+.meter-fill.weak {
+  background: linear-gradient(90deg, #ff4d67, #ff6b7f);
+}
+
+.meter-fill.moderate {
+  background: linear-gradient(90deg, #ff8b2d, #ffb347);
+}
+
+.meter-fill.strong {
+  background: linear-gradient(90deg, #f7c948, #ffe66f);
+}
+
+.meter-fill.very-strong {
+  background: linear-gradient(90deg, #20d6a0, #4af1b7);
+}
+
+.strength-pill,
+.risk-score {
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  border: 1px solid rgba(126, 170, 255, 0.35);
+  background: rgba(65, 103, 184, 0.24);
+}
+
+.strength-pill.weak {
+  color: #ffc7cf;
+  border-color: rgba(255, 101, 132, 0.6);
+}
+
+.strength-pill.moderate {
+  color: #ffdcb8;
+  border-color: rgba(255, 159, 67, 0.6);
+}
+
+.strength-pill.strong {
+  color: #ffeeb9;
+  border-color: rgba(248, 208, 94, 0.6);
+}
+
+.strength-pill.very-strong {
+  color: #c8ffe9;
+  border-color: rgba(29, 233, 182, 0.65);
+}
+
+.risk-card {
+  border-width: 1px;
+}
+
+.risk-low {
+  border-color: rgba(29, 233, 182, 0.6);
+}
+
+.risk-moderate {
+  border-color: rgba(255, 159, 67, 0.6);
+}
+
+.risk-high {
+  border-color: rgba(248, 208, 94, 0.65);
+}
+
+.risk-critical {
+  border-color: rgba(255, 101, 132, 0.7);
+}
+
+.risk-fill.risk-low {
+  background: linear-gradient(90deg, #20d6a0, #4af1b7);
+}
+
+.risk-fill.risk-moderate {
+  background: linear-gradient(90deg, #ff8b2d, #ffb347);
+}
+
+.risk-fill.risk-high {
+  background: linear-gradient(90deg, #f7c948, #ffe66f);
+}
+
+.risk-fill.risk-critical {
+  background: linear-gradient(90deg, #ff4d67, #ff6b7f);
+}
+
+.education-card {
+  margin-top: 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(126, 170, 255, 0.28);
+  padding: 0.95rem;
+  background: rgba(12, 25, 50, 0.9);
+}
+
+.education-card h3 {
+  margin-top: 0;
 }
 
 .card-glow {
@@ -546,14 +716,16 @@ main {
   }
 }
 
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 620px) {
   .main-nav {
     width: 100%;
     margin-top: 0.8rem;
-  }
-
-  .main-nav .nav-link {
-    flex: 1;
   }
 
   .metric-grid,
